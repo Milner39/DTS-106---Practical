@@ -19,7 +19,7 @@ class Base(Component):
   js_file = "base.js"
 
 
-  class Args(NamedTuple):
+  class Kwargs(NamedTuple):
     title: str = "CannyByte"
 
   class Slots(NamedTuple):
@@ -28,11 +28,17 @@ class Base(Component):
 
   # Additional CSS and JS
   class Media:  # pyright: ignore[reportIncompatibleVariableOverride]
-    css = ["https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css"]
+    css = [
+      "https://cdn.jsdelivr.net/npm/bootstrap@5/dist/css/bootstrap.min.css",
+      "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css",
+    ]
+    js = [
+      "https://cdn.jsdelivr.net/npm/bootstrap@5/dist/js/bootstrap.bundle.min.js",
+    ]
 
 
 
-  def get_template_data(self, args: Args, kwargs, slots: Slots, context):
+  def get_template_data(self, args, kwargs: Kwargs, slots: Slots, context):
     return {
-      "title": args.title
+      "title": kwargs.title
     }

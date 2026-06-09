@@ -1,0 +1,31 @@
+{% with page_title=is_edit|yesno:"Edit event,New event" %}
+{% component "base" title=page_title %}
+  {% fill "content" %}
+    {% component "centered_card" max_width="520px" %}
+      {% fill "content" %}
+        <h1 class="card-title h4 mb-3">{{ page_title }}</h1>
+
+        {# enctype is required so the image file is uploaded. #}
+        <form method="post" enctype="multipart/form-data" novalidate>
+          {% csrf_token %}
+          {% component "form_fields" form=form / %}
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success">
+              {% if is_edit %}Save changes{% else %}Publish event{% endif %}
+            </button>
+            {% if is_edit %}
+            <a
+              href="{% url 'event_delete' event.pk %}"
+              class="btn btn-outline-danger ms-auto"
+            >
+              <i class="bi bi-trash"></i> Delete
+            </a>
+            {% endif %}
+          </div>
+        </form>
+      {% endfill %}
+    {% endcomponent %}
+  {% endfill %}
+{% endcomponent %}
+{% endwith %}

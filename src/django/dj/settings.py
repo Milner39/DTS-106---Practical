@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 
+from django.contrib.messages import constants as messages
 from django_components import ComponentsSettings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -33,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+  'events',
   'django.contrib.admin',
   'django.contrib.auth',
   'django.contrib.contenttypes',
@@ -98,7 +100,7 @@ APP_COMPONENT_DIRS = [
 COMPONENTS = ComponentsSettings(
   # Where to look for components. Autodiscovery imports every .py file found
   # under these dirs (recursively), registering any @register()-ed component.
-  dirs=[BASE_DIR / 'components', *APP_COMPONENT_DIRS],
+  dirs=[*APP_COMPONENT_DIRS],
 )
 
 WSGI_APPLICATION = 'dj.wsgi.application'
@@ -158,6 +160,36 @@ STATICFILES_FINDERS = [
   'django.contrib.staticfiles.finders.AppDirectoriesFinder',
   'django_components.finders.ComponentsFileSystemFinder',
 ]
+
+# Media files (user uploads, e.g. event images)
+# https://docs.djangoproject.com/en/5.2/topics/files/
+
+MEDIA_URL = 'media/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
+# Authentication
+# https://docs.djangoproject.com/en/5.2/topics/auth/default/
+
+# Where @login_required sends anonymous users.
+LOGIN_URL = 'login'
+
+# Where login / signup redirect on success.
+LOGIN_REDIRECT_URL = 'events'
+
+# No LOGOUT_REDIRECT_URL: leaving it unset lets LogoutView render
+# registration/logged_out.html instead of redirecting away immediately.
+
+
+# Messages
+# https://docs.djangoproject.com/en/5.2/ref/contrib/messages/
+
+# Map Django's ERROR level to Bootstrap's `alert-danger`.
+MESSAGE_TAGS = {
+  messages.ERROR: 'danger',
+}
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

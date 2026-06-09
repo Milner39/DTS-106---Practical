@@ -7,3 +7,6 @@ tmp
 
 # Database
 **/db.sqlite3
+
+# Media uploads
+src/django/media

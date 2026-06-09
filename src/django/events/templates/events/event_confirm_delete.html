@@ -1,0 +1,21 @@
+{% component "base" title="Delete event" %}
+  {% fill "content" %}
+    {% component "centered_card" max_width="460px" body_class="text-center" %}
+      {% fill "content" %}
+        <i class="bi bi-exclamation-triangle text-danger fs-3"></i>
+        <h1 class="h5 mt-2">Delete this event?</h1>
+        <p class="text-secondary small mb-4">
+          "{{ event.title }}" will be permanently removed. This cannot be
+          undone.
+        </p>
+        <form method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Yes, delete</button>
+          <a href="{% url 'event_detail' event.pk %}" class="btn btn-outline-secondary">
+            Cancel
+          </a>
+        </form>
+      {% endfill %}
+    {% endcomponent %}
+  {% endfill %}
+{% endcomponent %}

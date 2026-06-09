@@ -1,0 +1,7 @@
+<div class="d-flex justify-content-center">
+  <div class="card shadow-sm" style="max-width: {{ max_width }}; width: 100%;">
+    <div class="card-body{% if body_class %} {{ body_class }}{% endif %}">
+      {% slot "content" / %}
+    </div>
+  </div>
+</div>

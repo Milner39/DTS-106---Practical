@@ -6,6 +6,7 @@ dependencies = [
   # Add with `uv add <package-name>`
   "django>=6.0.4",
   "django-components>=0.151.0",
+  "pillow>=12.2.0",
   "yapf>=0.43.0",
 ]
 

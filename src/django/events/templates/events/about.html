@@ -1,0 +1,15 @@
+{% component "base" title="About" %}
+  {% fill "content" %}
+    <h1 class="h3 mb-3">About CannyByte</h1>
+    <p>
+      CannyByte is a community events platform run in partnership with the
+      local council to help people find cost-of-living support.
+    </p>
+    <p>
+      Anyone can browse the public homepage. Once you
+      <a href="{% url 'signup' %}">sign up</a> and
+      <a href="{% url 'login' %}">log in</a> you can see every event, search and
+      filter them, post your own, and join the conversation in the comments.
+    </p>
+  {% endfill %}
+{% endcomponent %}

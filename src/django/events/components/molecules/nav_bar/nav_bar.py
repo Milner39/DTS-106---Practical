@@ -3,6 +3,7 @@ Nav Bar
 
 The site-wide nav bar:
 - Renders the navigation
+- Adapts to whether the user is logged-out, a logged-in member, or staff
 """
 
 from typing import NamedTuple
@@ -23,10 +24,17 @@ class NavBar(Component):
     label: str
     url_name: str
 
-  links = [
+  guest_links = [
     Link("Home", "home"),
     Link("About", "about"),
     Link("Contact", "contact"),
+  ]
+  member_links = [
+    Link("Events", "events"),
+    Link("My events", "my_events"),
+  ]
+  staff_links = [
+    Link("Dashboard", "admin_events")
   ]
 
 
@@ -36,7 +44,22 @@ class NavBar(Component):
     resolver_match = getattr(self.request, "resolver_match", None)
     current_url_name = resolver_match.url_name if resolver_match else None
 
+    # `user` is provided by the auth context processor and is available
+    # directly in the template.
+    # Returning it here causes django-components to error.
+    user = self.context_processors_data.get("user")
+    is_authenticated = bool(user and user.is_authenticated)
+    is_staff = bool(user and user.is_staff)
+
+    links = (
+      self.guest_links
+      + (self.member_links if is_authenticated else [])
+      + (self.staff_links if is_staff else [])
+    )
+
     return {
-      "links": self.links,
+      "links": links,
       "current_url_name": current_url_name,
+      "is_authenticated": is_authenticated,
+      "is_staff": is_staff,
     }

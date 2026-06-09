@@ -1,0 +1,28 @@
+<div class="table-responsive">
+  <table class="table align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Title</th>
+        {% if show_owner %}<th>Owner</th>{% endif %}
+        <th>Date</th>
+        <th class="text-end">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for event in events %}
+        <tr>
+          <td>
+            <a href="{% url 'event_detail' event.pk %}">{{ event.title }}</a>
+          </td>
+          {% if show_owner %}
+            <td class="small">{{ event.author.username }}</td>
+          {% endif %}
+          <td class="small">{{ event.date }}</td>
+          <td class="text-end text-nowrap">
+            {% component "event_actions" event=event / %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,8 @@
+<a
+  href="{% url 'event_edit' event.pk %}"
+  class="btn btn-sm btn-outline-secondary"
+>{% if icons %}<i class="bi bi-pencil"></i> {% endif %}Edit</a>
+<a
+  href="{% url 'event_delete' event.pk %}"
+  class="btn btn-sm btn-outline-danger"
+>{% if icons %}<i class="bi bi-trash"></i> {% endif %}Delete</a>

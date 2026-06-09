@@ -1,0 +1,17 @@
+{% component "base" title="Sign up" %}
+  {% fill "content" %}
+    {% component "centered_card" max_width="420px" %}
+      {% fill "content" %}
+        <h1 class="card-title h4 mb-3">Create your account</h1>
+        <form method="post" novalidate>
+          {% csrf_token %}
+          {% component "form_fields" form=form / %}
+          <button type="submit" class="btn btn-primary w-100">Sign up</button>
+        </form>
+        <p class="text-center small text-secondary mt-3 mb-0">
+          Already a member? <a href="{% url 'login' %}">Log in</a>
+        </p>
+      {% endfill %}
+    {% endcomponent %}
+  {% endfill %}
+{% endcomponent %}

@@ -1,0 +1,7 @@
+<div class="mb-3">
+  <div class="small">
+    <b>{{ comment.author.username }}</b>
+    <span class="text-secondary">· {{ comment.created_at|date:"j M Y, H:i" }}</span>
+  </div>
+  <div class="small">{{ comment.body|linebreaksbr }}</div>
+</div>

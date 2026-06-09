@@ -1,0 +1,58 @@
+{% component "base" title=event.title %}
+  {% fill "content" %}
+    <a href="{% url 'events' %}" class="btn btn-link btn-sm px-0 mb-2">
+      <i class="bi bi-arrow-left"></i> Back to events
+    </a>
+
+    {% if event.image %}
+      <img
+        src="{{ event.image.url }}"
+        class="img-fluid rounded mb-3 w-100"
+        alt="{{ event.title }}"
+        style="max-height: 320px; object-fit: cover;"
+      />
+    {% endif %}
+
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+      <div>
+        <h1 class="h4 mb-1">{{ event.title }}</h1>
+        <div class="text-secondary small">
+          <i class="bi bi-calendar3"></i> {{ event.date }}{% if event.time %}, {{ event.time }}{% endif %}
+          · <i class="bi bi-geo-alt"></i> {{ event.location }}
+          · by <b>{{ event.author.username }}</b>
+        </div>
+      </div>
+
+      {% if can_modify %}
+        <div class="text-nowrap">
+          {% component "event_actions" event=event icons=True / %}
+        </div>
+      {% endif %}
+    </div>
+
+    <p class="mt-3">{{ event.description|linebreaksbr }}</p>
+
+    <hr />
+
+    <h2 class="h6 mb-3">
+      <i class="bi bi-chat-left-text"></i> Comments ({{ comments|length }})
+    </h2>
+
+    {% for comment in comments %}
+      {% component "comment" comment=comment / %}
+    {% empty %}
+      <p class="text-secondary small">No comments yet.</p>
+    {% endfor %}
+
+    <form method="post" class="mt-3">
+      {% csrf_token %}
+      {% for error in form.body.errors %}
+        <div class="text-danger small">{{ error }}</div>
+      {% endfor %}
+      <div class="input-group">
+        {{ form.body }}
+        <button type="submit" class="btn btn-primary">Post</button>
+      </div>
+    </form>
+  {% endfill %}
+{% endcomponent %}
