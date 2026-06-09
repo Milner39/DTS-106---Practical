@@ -20,7 +20,7 @@ class Base(Component):
 
 
   class Args(NamedTuple):
-    title: str = "Events39"
+    title: str = "CannyByte"
 
   class Slots(NamedTuple):
     content: SlotInput | None = None
