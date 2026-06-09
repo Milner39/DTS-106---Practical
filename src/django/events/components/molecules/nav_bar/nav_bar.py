@@ -8,6 +8,7 @@ The site-wide nav bar:
 from django_components import Component, register
 
 
+
 @register("nav_bar")
 class NavBar(Component):
   template_file = "nav_bar.html"

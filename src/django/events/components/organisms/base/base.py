@@ -6,7 +6,10 @@ The site-wide HTML skeleton:
 - Renders base layout components
 """
 
+from typing import NamedTuple
+
 from django_components import Component, SlotInput, register
+
 
 
 @register("base")
@@ -16,10 +19,10 @@ class Base(Component):
   js_file = "base.js"
 
 
-  class Args():
+  class Args(NamedTuple):
     title: str = "Events39"
 
-  class Slots():
+  class Slots(NamedTuple):
     content: SlotInput | None = None
 
 
