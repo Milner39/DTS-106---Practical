@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{{ title }}</title>
+
+    {# Collects the CSS of every component rendered on the page #}
+    {% component_css_dependencies %}
+  </head>
+
+  <body>
+
+    {% component "nav_bar" / %}
+
+    <div class="container mt-4">
+      {% slot "content" / %}
+    </div>
+
+    {# Collects the JS of every component rendered on the page #}
+    {% component_js_dependencies %}
+  </body>
+</html>
